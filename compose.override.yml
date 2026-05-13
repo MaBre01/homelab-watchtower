@@ -1,0 +1,8 @@
+volumes:
+  freshrss_data: {}
+  freshrss_extensions: {}
+
+services:
+  freshrss:
+    ports:
+      - "${FRESH_RSS_PORT}:80"

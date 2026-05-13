@@ -1,0 +1,11 @@
+name: watchtower
+
+services:
+  freshrss:
+    image: freshrss/freshrss:latest
+    container_name: watchtower-freshrss
+    volumes:
+      - ${FRESH_RSS_DATA:-freshrss_data}:/var/www/FreshRSS/data
+      - ${FRESH_RSS_EXTENSIONS:-freshrss_extensions}:/var/www/FreshRSS/extensions
+    environment:
+      TZ: ${FRESH_RSS_TIMEZONE}

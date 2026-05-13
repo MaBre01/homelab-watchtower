@@ -1,0 +1,26 @@
+volumes:
+  freshrss-netbird: {}
+
+services:
+  freshrss-netbird:
+    image: netbirdio/netbird:latest
+    hostname: ${FRESH_RSS_NB_HOSTNAME}
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE
+    devices:
+      - /dev/net/tun
+    network_mode: host
+    environment:
+      NB_SETUP_KEY: ${FRESH_RSS_NB_SETUP_KEY}
+    volumes:
+      - freshrss-netbird:/var/lib/netbird
+
+  freshrss:
+    restart: unless-stopped
+    network_mode: service:freshrss-netbird
+    environment:
+      FRESHRSS_INSTALL: |-
+        --base-url ${FRESH_RSS_BASE_URL}
