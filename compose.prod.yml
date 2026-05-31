@@ -15,12 +15,10 @@ services:
     network_mode: host
     environment:
       NB_SETUP_KEY: ${FRESH_RSS_NB_SETUP_KEY}
+      NB_MANAGEMENT_URL: ${NB_MANAGEMENT_URL}
     volumes:
       - freshrss-netbird:/var/lib/netbird
 
   freshrss:
     restart: unless-stopped
     network_mode: service:freshrss-netbird
-    environment:
-      FRESHRSS_INSTALL: |-
-        --base-url ${FRESH_RSS_BASE_URL}
